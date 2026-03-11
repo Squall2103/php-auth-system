@@ -28,9 +28,8 @@
           $email = $_POST['email']; 
           $password = $_POST['password'];
 
-          $login = $conn->query("SELECT * FROM users WHERE email = '$email'");
-
-          $login->execute();
+          $login = $conn->prepare("SELECT * FROM users WHERE email = :email");
+          $login->execute([':email' => $email]);
 
           $data = $login->fetch(PDO::FETCH_ASSOC);
 
